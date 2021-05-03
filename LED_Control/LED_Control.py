@@ -2,18 +2,39 @@
 Programmers: Ben Kocik, Parker Authier, Ava Zaremski
 Description: LED test code
 '''
-
+# Imports
 #import rpi_ws281x
 import board
 import neopixel
+import time
+import random
 
-pixels = neopixel.NeoPixel(board.D18, 30)
+LED_COUNT = 30
 
+pixels = neopixel.NeoPixel(board.D18, LED_COUNT)
+
+# Test LEDs
+off(LED_COUNT)
 pixels[0] = (255, 0, 0)
+time.sleep(1000)
+pixels.fill(LED_COUNT, 0, 255, 0)
+
+# turn of
+def off(LED_COUNT):
+    for led in range(LED_COUNT):
+        pixels[led] = (0, 0, 0)
+
+def left(LED_COUNT, r, g, b):
+    for led in range(LED_COUNT):
+        pixels[led] = (r, g, b)
+        time.sleep(100)
+
+def randomLED(LED_COUNT):
+    pixels[random.randint(0, LED_COUNT)] = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+
 
 # Im sorry parker but the below is getting commented out :(
 '''
-
 #Setup 
 LED_COUNT = 60
 LED_PIN = 18
@@ -60,4 +81,3 @@ def brightness(bright):
     strip.setBrightness(bright)
     return 
 '''
-
