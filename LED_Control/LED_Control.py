@@ -1,12 +1,24 @@
+'''
+Programmers: Ben Kocik, Parker Authier, Ava Zaremski
+Description: LED test code
+'''
 
-import rpi_ws281x
+#import rpi_ws281x
+import board
+import neopixel
 
+pixels = neopixel.NeoPixel(board.D18, 30)
+
+pixels[0] = (255, 0, 0)
+
+# Im sorry parker but the below is getting commented out :(
+'''
 
 #Setup 
-LED_COUNT = 0
-LED_PIN = 0
+LED_COUNT = 60
+LED_PIN = 18
 LED_FREQ_HZ = 8000000
-LED_DMA = 10
+# LED_DMA = 10
 LED_BRIGHTNESS = 255
 LED_INVERT = False
 
@@ -47,5 +59,5 @@ def off():
 def brightness(bright):
     strip.setBrightness(bright)
     return 
-
+'''
 
