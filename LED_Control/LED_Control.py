@@ -11,17 +11,19 @@ import random
 
 
 # turn off
-def off(LED_COUNT):
-    for led in range(LED_COUNT):
+def off(num):
+    for led in range(num):
         pixels[led] = (0, 0, 0)
 
-def left(LED_COUNT, r, g, b):
-    for led in range(LED_COUNT):
+def left(num, r, g, b):
+    for led in range(num):
         pixels[led] = (r, g, b)
         time.sleep(0.1)
 
-def randomLED(LED_COUNT):
-    pixels[random.randint(0, LED_COUNT)] = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+def randomLED(num):
+    for led in num:
+        pixels[random.randint(0, num)] = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        time.sleep(0.1)
 
 # Number of LEDs
 LED_COUNT = 30
