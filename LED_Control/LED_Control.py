@@ -9,17 +9,8 @@ import neopixel
 import time
 import random
 
-LED_COUNT = 30
 
-pixels = neopixel.NeoPixel(board.D18, LED_COUNT)
-
-# Test LEDs
-off(LED_COUNT)
-pixels[0] = (255, 0, 0)
-time.sleep(1000)
-pixels.fill(LED_COUNT, 0, 255, 0)
-
-# turn of
+# turn off
 def off(LED_COUNT):
     for led in range(LED_COUNT):
         pixels[led] = (0, 0, 0)
@@ -31,6 +22,17 @@ def left(LED_COUNT, r, g, b):
 
 def randomLED(LED_COUNT):
     pixels[random.randint(0, LED_COUNT)] = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+
+# Number of LEDs
+LED_COUNT = 30
+
+pixels = neopixel.NeoPixel(board.D18, LED_COUNT)
+
+# Test LEDs
+off(LED_COUNT)
+pixels[0] = (255, 0, 0)
+time.sleep(1000)
+pixels.fill(LED_COUNT, 0, 255, 0)
 
 
 # Im sorry parker but the below is getting commented out :(
