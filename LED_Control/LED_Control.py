@@ -18,21 +18,53 @@ def off(num):
 def left(num, r, g, b):
     for led in range(num):
         pixels[led] = (r, g, b)
-        time.sleep(0.1)
+        time.sleep(0.01)
 
 def randomLED(num):
     for led in range(num):
-        pixels[random.randint(0, num)] = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        pixels[random.randint(0, num-1)] = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
         time.sleep(0.1)
+
+def pulse(length, num, r, g, b, direction="left"):
+    off(num)
+    if direction == "left":
+        led = 0
+        while True:
+            if led > num:
+                led = 0
+            for i in range(length)
+                pixels[led] = (r, g, b)
+                led += 1
+            behind = led-length
+            if behind < 0:
+                behind -= (num + length)
+            pixels[behind] = (0, 0, 0)
+    # should go the opposite way
+#    if direction == "right":
+#        led = num
+#        while True:
+#            led -= 1
+#            if led < 0:
+#                led = num
+#            for led 
+
+def rainbow_cycle(num):
+    for j in range(255):
+        for i in range(num):
+            pixel_index = (i * 256 // num_pixels) + j
+            pixels[i] = wheel(pixel_index & 255)
+        pixels.show()
+        time.sleep(0.1)
+
 
 # Number of LEDs
 LED_COUNT = int(input("Number of LEDs on strip: "))
 pixels = neopixel.NeoPixel(board.D18, LED_COUNT)
 
 print("Filling LEDs with a cool color")
-pixels.fill((200, 40, 200))
+pixels.fill((255, 255, 255))
 
-print("1:off, 2:left, 3:randomLED")
+print("1:off, 2:left, 3:randomLED, 4:pulse left, 5:pulse right")
 
 test = -1
 while test != 0:
@@ -43,6 +75,11 @@ while test != 0:
         left(LED_COUNT, 0, 0, 255)
     if test == 3:
         randomLED(LED_COUNT)
+    if test == 4:
+        pulse(5, LED_COUNT, 60, 5, 120)
+    if test == 5:
+        pulse(5, LED_COUNT, 5, 120, 170, "right")
+
 
 # Im sorry parker but the below is getting commented out :(
 '''
