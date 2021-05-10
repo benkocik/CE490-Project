@@ -32,7 +32,7 @@ pixels = neopixel.NeoPixel(board.D18, LED_COUNT)
 off(LED_COUNT)
 pixels[0] = (255, 0, 0)
 time.sleep(1)
-pixels.fill(LED_COUNT, 0, 255, 0)
+pixels.fill((0, 255, 0))
 
 
 # Im sorry parker but the below is getting commented out :(
