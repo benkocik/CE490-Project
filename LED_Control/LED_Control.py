@@ -64,7 +64,7 @@ pixels = neopixel.NeoPixel(board.D18, LED_COUNT)
 print("Filling LEDs with a cool color")
 pixels.fill((255, 255, 255))
 
-print("1:off, 2:left, 3:randomLED, 4:pulse left, 5:pulse right")
+print("1:off, 2:left, 3:randomLED, 4:pulse left, 5:pulse right, 6:all on high, 7:all on low, 8:all on medium, 9:rainbow")
 
 test = -1
 while test != 0:
@@ -79,6 +79,14 @@ while test != 0:
         pulse(5, LED_COUNT, 60, 5, 120)
     if test == 5:
         pulse(5, LED_COUNT, 5, 120, 170, "right")
+    if test == 6:
+        pixels.fill((255, 255, 255))
+    if test == 7:
+        pixels.fill((1, 1, 1))
+    if test == 8:
+        pixels.fill((120, 120, 120))
+    if test == 9:
+        rainbow_cycle(LED_COUNT)
 
 
 # Im sorry parker but the below is getting commented out :(
