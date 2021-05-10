@@ -26,16 +26,22 @@ def randomLED(num):
         time.sleep(0.1)
 
 # Number of LEDs
-LED_COUNT = 30
-
+LED_COUNT = int(input("Number of LEDs on strip: "))
 pixels = neopixel.NeoPixel(board.D18, LED_COUNT)
 
-# Test LEDs
-off(LED_COUNT)
-pixels[0] = (255, 0, 0)
-time.sleep(1)
-pixels.fill((0, 255, 0))
+print("Filling LEDs with a cool color")
+pixels.fill((200, 40, 200))
 
+print("1:off, 2:left, 3:randomLED")
+
+while test != 0:
+    test = int(input("What test would you like to run? "))
+    if test == 1:
+        off(LED_COUNT)
+    if test == 2:
+        left(LED_COUNT, 0, 0, 255)
+    if test == 3:
+        randomLED(LED_COUNT)
 
 # Im sorry parker but the below is getting commented out :(
 '''
