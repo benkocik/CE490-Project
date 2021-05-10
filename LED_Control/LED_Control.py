@@ -32,7 +32,7 @@ def pulse(length, num, r, g, b, direction="left"):
         while True:
             if led > num:
                 led = 0
-            for i in range(length)
+            for i in range(length):
                 pixels[led] = (r, g, b)
                 led += 1
             behind = led-length
