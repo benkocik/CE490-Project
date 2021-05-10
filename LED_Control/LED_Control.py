@@ -34,6 +34,7 @@ pixels.fill((200, 40, 200))
 
 print("1:off, 2:left, 3:randomLED")
 
+test = -1
 while test != 0:
     test = int(input("What test would you like to run? "))
     if test == 1:
