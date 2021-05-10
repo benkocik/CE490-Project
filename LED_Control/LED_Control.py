@@ -21,7 +21,7 @@ def left(num, r, g, b):
         time.sleep(0.1)
 
 def randomLED(num):
-    for led in num:
+    for led in range(num):
         pixels[random.randint(0, num)] = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
         time.sleep(0.1)
 
