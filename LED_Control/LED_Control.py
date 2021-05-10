@@ -51,7 +51,7 @@ def pulse(length, num, r, g, b, direction="left"):
 def rainbow_cycle(num):
     for j in range(255):
         for i in range(num):
-            pixel_index = (i * 256 // num_pixels) + j
+            pixel_index = (i * 256 // num) + j
             pixels[i] = wheel(pixel_index & 255)
         pixels.show()
         time.sleep(0.1)
