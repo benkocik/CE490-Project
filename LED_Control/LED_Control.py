@@ -40,13 +40,41 @@ def pulse(length, num, r, g, b, direction="left"):
                 behind -= (num + length)
             pixels[behind] = (0, 0, 0)
     # should go the opposite way
-#    if direction == "right":
-#        led = num
-#        while True:
-#            led -= 1
-#            if led < 0:
-#                led = num
-#            for led 
+    if direction == "right":
+        led = num
+        while True:
+            if led < 0:
+                led = num
+            for i in range(length):
+                pixels[led] = (r, g, b)
+                led -= 1
+            behind = num - led
+            if behind < 0:
+                behind -= (num + length)
+            pixels[behind] = (0, 0, 0)
+
+def center(num, r, g, b):
+    off(num)
+    middle = num/2
+    start = 0
+    end = num
+
+    while True:
+        pixels[start] = (r, g, b)
+        pixels[end] = (r, g, b)
+
+        start += 1
+        end -= 1
+
+        pixels[start -1] = (0, 0, 0)
+        pixels[end + 1] = (0, 0, 0)
+        
+        if(start > middle):
+            pixels[middle] = (0, 0, 0)
+            start = 0;
+        if(end < middle):
+            end = num
+            
 
 def wheel(pos):
     # Input a value 0 to 255 to get a color value.
