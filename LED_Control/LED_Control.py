@@ -75,6 +75,7 @@ def center(num, r, g, b):
             start = 0;
         if(end < middle):
             end = num
+        time.sleep(0.1)
             
 
 def wheel(pos):
