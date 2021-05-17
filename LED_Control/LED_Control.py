@@ -56,7 +56,7 @@ def pulse(length, num, r, g, b, direction="left"):
 
 def center(num, r, g, b):
     off(num)
-    middle = num/2
+    middle = int(num/2)
     start = 0
     end = num
     end -= 1
