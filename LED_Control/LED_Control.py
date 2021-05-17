@@ -25,6 +25,7 @@ def randomLED(num):
         pixels[random.randint(0, num-1)] = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
         time.sleep(0.1)
 
+# Broken - use as reference only
 def pulse(length, num, r, g, b, direction="left"):
     off(num)
     if direction == "left":
@@ -113,7 +114,7 @@ pixels = neopixel.NeoPixel(board.D18, LED_COUNT)
 print("Filling LEDs with a cool color")
 pixels.fill((255, 255, 255))
 
-print("1:off, 2:left, 3:randomLED, 4:pulse left, 5:pulse right, 6:all on high, 7:all on low, 8:all on medium, 9:rainbow")
+print("1:off, 2:left, 3:randomLED, 4:pulse left, 5:pulse right, 6:all on high, 7:all on low, 8:all on medium, 9:rainbow, 10:center")
 
 test = -1
 while test != 0:
@@ -136,6 +137,8 @@ while test != 0:
         pixels.fill((120, 120, 120))
     if test == 9:
         rainbow_cycle(LED_COUNT)
+    if test == 10:
+        center(LED_COUNT, 0, 255, 0)
 
 
 # Im sorry parker but the below is getting commented out :(
