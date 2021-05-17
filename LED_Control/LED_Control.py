@@ -75,7 +75,7 @@ def center(num, r, g, b):
         
         if(start > middle):
             pixels[middle] = (0, 0, 0)
-            start = 0;
+            start = 0
         if(end < middle):
             end = num
             end -= 1
