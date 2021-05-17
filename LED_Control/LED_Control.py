@@ -58,7 +58,7 @@ def center(num, r, g, b):
     off(num)
     middle = num/2
     start = 0
-    end = num
+    end = num-1
 
     while True:
         pixels[start] = (r, g, b)
