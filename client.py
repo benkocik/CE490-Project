@@ -14,7 +14,7 @@ def main():
 
     # Configure port
     PORT = 12345
-    ADDR = ""   #TODO figure out address of server
+    ADDR = "192.168.1.123"   #TODO figure out address of server
 
     # Connect to the server on computer
     s.connect((ADDR, PORT))
