@@ -21,6 +21,7 @@ def main():
 
     # Get data from server
     data = s.recv(1024)
+    print(str(data))
 
     #TODO: Decide on closing
     s.close

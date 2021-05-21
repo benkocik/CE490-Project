@@ -21,25 +21,27 @@ def main():
     s.bind(('', PORT))
     print("Socket binded to port: " + str(PORT))
 
-    while True:
+    s.listen(5)
 
-    c, addr = s.accpet()
+    c, addr = s.accept()
     print("Received connection from " + str(addr))
     
+    c.send("Thanks for connecting")
+    '''
     # Get door from user
     print("Select an exit door")
     print("Options: 1, 2, 3, 4, 5, 6, 7")
     exitDoor = 0
     # Door input must be between 1 and 7
     while exitDoor < 1 and exitDoor > 7:
-        exitDoor = int(input("Input Door (must be between 1 and 7): "))
+        exitDoor = input("Input Door (must be between 1 and 7): ")
     
     # Get emergency type from user
     #TODO: Talk to client
 
     #TODO: Send information to client
     c.send(exitDoor)
-
+    '''
     #TODO: Decide on closing
     c.close()
 
