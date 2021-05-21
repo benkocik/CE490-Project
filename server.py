@@ -16,7 +16,7 @@ def main():
 
     # Configure address and port
     PORT = 12345
-    HOST = "192.168.1.114"
+    HOST = ""
     
     # Bind the port
     s.bind((HOST, PORT))
@@ -45,8 +45,8 @@ def main():
         #TODO: Send information to client
         c.send(exitDoor)
         '''
-    #TODO: Decide on closing
-    c.close()
+        #TODO: Decide on closing
+        c.close()
 
 if __name__ == "__main__":
     main()
