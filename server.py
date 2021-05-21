@@ -16,9 +16,10 @@ def main():
 
     # Configure address and port
     PORT = 12345
+    HOST = "192.168.1.114"
     
     # Bind the port
-    s.bind(('', PORT))
+    s.bind((HOST, PORT))
     print("Socket binded to port: " + str(PORT))
 
     s.listen(5)

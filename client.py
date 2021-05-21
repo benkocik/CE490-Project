@@ -14,10 +14,10 @@ def main():
 
     # Configure port
     PORT = 12345
-    ADDR = "192.168.1.123"   #TODO figure out address of server
+    HOST = "192.168.1.114"   #TODO figure out address of server
 
     # Connect to the server on computer
-    s.connect((ADDR, PORT))
+    s.connect((HOST, PORT))
 
     # Get data from server
     data = s.recv(1024)
