@@ -10,7 +10,7 @@ import socket
 # Main function definition
 def main():
     # Create socket
-    s = socket.socket()
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     # Configure port
     PORT = 12345
