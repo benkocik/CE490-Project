@@ -41,6 +41,7 @@ def main():
     c.send(exitDoor)
 
     #TODO: Decide on closing
+    c.close()
 
 if __name__ == "__main__":
     main()

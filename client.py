@@ -23,7 +23,7 @@ def main():
     data = s.recv(1024)
 
     #TODO: Decide on closing
-    #s.close
+    s.close
     
 
 if __name__ == "__main__":
