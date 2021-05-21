@@ -29,7 +29,7 @@ def main():
         c, addr = s.accept()
         print("Received connection from " + str(addr))
         
-        c.send("Thanks for connecting")
+        c.send(b"Thanks for connecting")
         '''
         # Get door from user
         print("Select an exit door")
