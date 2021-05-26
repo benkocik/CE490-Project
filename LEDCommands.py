@@ -6,13 +6,13 @@ import board
 #color is a 3-length array with values for red,green,and blue
 
 def turnOff( pixels ):
-    pixels.fill((0,0,0),1,50)
+    pixels.fill((0,0,0))
     pixels.show( )
 
 
 def solidColor(pixels, color):
     "Displays a solid color"
-    pixels.fill((color[0], color[1], color[2]),1,50)
+    pixels.fill((color[0], color[1], color[2]))
     pixels.show( )
 
 def colorFlash(pixels, color, wait_ms = 50):
@@ -93,7 +93,7 @@ green = (0,255,0)
 blue = (0,0,255)
 
 print("Filling LEDs with a cool color")
-pixels.fill((0, 255, 255),1,50)
+pixels.fill((0, 255, 255))
 pixels.show()
 
 print("1:off, 2:Solid Color, 3:Solid Color Flash, 4:Direct Forward, 5:Direct Backward, 6:Arrived, 7:Tornado, 8:Fire")
