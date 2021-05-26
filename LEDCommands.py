@@ -8,13 +8,13 @@ from neopixel_effects import NeoPixel_Effects
 #color is a 3-length array with values for red,green,and blue
 
 def turnOff( pixels ):
-    pixels.fill((0,0,0),1,50)
+    pixels.fill((0,0,0),0,50)
     pixels.show( )
 
 
 def solidColor(pixels, color):
     "Displays a solid color"
-    pixels.fill((color[0], color[1], color[2]),1,50)
+    pixels.fill((color[0], color[1], color[2]),0,50)
     pixels.show( )
 
 def colorFlash(pixels, color, wait_ms = 50):
@@ -61,7 +61,7 @@ def tornadoWarning(pixels):
 
 def directForward(pixels, color, wait_ms = 50):
     "Wipe color across display a pixel at a time."
-    for i in range(50):
+    for i in range(len(pixels)):
         pixels[i] = (color[0],color[1],color[2])
         pixels.show()
         time.sleep(wait_ms / 1000.0)
@@ -69,7 +69,7 @@ def directForward(pixels, color, wait_ms = 50):
 
 def directBackward(strip, color, wait_ms = 50):
     "Wipe color across display a pixel at a time."
-    for i in range(pixels.len):
+    for i in range(len(pixels)):
         pixels[pixels.len - i] = (color[0],color[1],color[2])
         pixels.show()
         time.sleep(wait_ms / 1000.0)
@@ -77,7 +77,7 @@ def directBackward(strip, color, wait_ms = 50):
 
 def arrived(pixels, color, wait_ms = 50):
     "Color flashes outward into center to display arrival"
-    center = pixels.len / 2
+    center = len(pixels) / 2
     for i in range(center):
         pixels[i] = (color[0],color[1],color[2])
         pixels[pixels.len - i] = (color[0],color[1],color[2])
