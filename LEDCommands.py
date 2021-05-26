@@ -13,7 +13,7 @@ def turnOff( pixels ):
 def solidColor(pixels, color):
     "Displays a solid color"
     pixels.fill((color[0], color[1], color[2]))
-    pixels.show( )
+    pixels.show()
 
 def colorFlash(pixels, color, wait_ms = 50):
     "Flashes a solid color once"
@@ -68,7 +68,7 @@ def directForward(pixels, color, wait_ms = 50):
 def directBackward(strip, color, wait_ms = 50):
     "Wipe color across display a pixel at a time."
     for i in range(pixels.len):
-        pixels[pixels.len - i] = (color[0],color[1],color[2])
+        pixels[len(pixels) - i] = (color[0],color[1],color[2])
         pixels.show()
         time.sleep(wait_ms / 1000.0)
         turnOff(pixels)
@@ -78,7 +78,7 @@ def arrived(pixels, color, wait_ms = 50):
     center = pixels.len / 2
     for i in range(center):
         pixels[i] = (color[0],color[1],color[2])
-        pixels[pixels.len - i] = (color[0],color[1],color[2])
+        pixels[len(pixels) - i] = (color[0],color[1],color[2])
         pixels.show()
         time.sleep(wait_ms / 1000.0)
         turnOff(pixels)
