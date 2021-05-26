@@ -1,8 +1,6 @@
-#import rpi_ws281x
-#import neopixel
+import neopixel
 import time
-from emulator_backend import Adafruit_NeoPixel
-from neopixel_effects import NeoPixel_Effects
+import board
 
 # Define functions which animate LEDs in various ways.
 #color is a 3-length array with values for red,green,and blue
@@ -87,10 +85,8 @@ def arrived(pixels, color, wait_ms = 50):
 
 
 # Number of LEDs
-#LED_COUNT = int(input("Number of LEDs on strip: "))
-pixels = Adafruit_NeoPixel(100,6,"NEO_GRB + NEO_KHZ800")
-pixels.begin()
-pixels.setBrightness(100)
+LED_COUNT = int(input("Number of LEDs on strip: "))
+pixels = neopixel.NeoPixel(board.D18, LED_COUNT)
 
 red = (255,0,0)
 green = (0,255,0)
