@@ -67,7 +67,7 @@ def directForward(pixels, color, wait_ms = 50):
 
 def directBackward(strip, color, wait_ms = 50):
     "Wipe color across display a pixel at a time."
-    for i in range(pixels.len):
+    for i in range(len(pixels)):
         pixels[len(pixels) - i] = (color[0],color[1],color[2])
         pixels.show()
         time.sleep(wait_ms / 1000.0)
@@ -75,7 +75,7 @@ def directBackward(strip, color, wait_ms = 50):
 
 def arrived(pixels, color, wait_ms = 50):
     "Color flashes outward into center to display arrival"
-    center = pixels.len / 2
+    center = len(pixels) / 2
     for i in range(center):
         pixels[i] = (color[0],color[1],color[2])
         pixels[len(pixels) - i] = (color[0],color[1],color[2])
