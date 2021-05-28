@@ -65,7 +65,7 @@ def directForward(pixels, color, wait_ms = 50):
         time.sleep(wait_ms / 1000.0)
         turnOff(pixels)
 
-def directBackward(strip, color, wait_ms = 50):
+def directBackward(pixels, color, wait_ms = 50):
     "Wipe color across display a pixel at a time."
     for i in range(len(pixels)):
         pixels[len(pixels) - i] = (color[0],color[1],color[2])
