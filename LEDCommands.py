@@ -87,49 +87,54 @@ def init(LED_COUNT):
     pixels = neopixel.NeoPixel(board.D18, LED_COUNT)
     return pixels
 
-# Number of LEDs
-LED_COUNT = int(input("Number of LEDs on strip: "))
-pixels = neopixel.NeoPixel(board.D18, LED_COUNT)
-red = (255,0,0)
-green = (0,255,0)
-blue = (0,0,255)
+# Main function for testing.
+def main():
+    # Number of LEDs
+    LED_COUNT = int(input("Number of LEDs on strip: "))
+    pixels = neopixel.NeoPixel(board.D18, LED_COUNT)
+    red = (255,0,0)
+    green = (0,255,0)
+    blue = (0,0,255)
 
-print("Filling LEDs with a cool color")
-pixels.fill((0, 255, 255))
-pixels.show()
+    print("Filling LEDs with a cool color")
+    pixels.fill((0, 255, 255))
+    pixels.show()
 
-print("1:off, 2:Solid Color, 3:Solid Color Flash, 4:Direct Forward, 5:Direct Backward, 6:Arrived, 7:Tornado, 8:Fire")
+    print("1:off, 2:Solid Color, 3:Solid Color Flash, 4:Direct Forward, 5:Direct Backward, 6:Arrived, 7:Tornado, 8:Fire")
 
-test = -1
-while test != 0:
-    test = int(input("What test would you like to run? "))
-    if test == 1:
-        turnOff(pixels)
-        time.sleep(10)
-    if test == 2:
-        solidColor(pixels, red)
-        time.sleep(10)
-        solidColor(pixels,green)
-        time.sleep(10)
-        solidColor(pixels,blue)
-        time.sleep(10)
-    if test == 3:
-        colorFlash(pixels, red)
-        colorFlash(pixels,green)
-        colorFlash(pixels,blue)
-    if test == 4:
-        directForward(pixels,red)
-        directForward(pixels,green)
-        directForward(pixels,blue)
-    if test == 5:
-        directBackward(pixels,red)
-        directBackward(pixels,green)
-        directBackward(pixels,blue)
-    if test == 6:
-        arrived(pixels,red)
-        arrived(pixels,green)
-        arrived(pixels,blue)
-    if test == 7:
-        tornadoWarning(pixels)
-    if test == 8:
-        fireWarning(pixels)
+    test = -1
+    while test != 0:
+        test = int(input("What test would you like to run? "))
+        if test == 1:
+            turnOff(pixels)
+            time.sleep(10)
+        if test == 2:
+            solidColor(pixels, red)
+            time.sleep(10)
+            solidColor(pixels,green)
+            time.sleep(10)
+            solidColor(pixels,blue)
+            time.sleep(10)
+        if test == 3:
+            colorFlash(pixels, red)
+            colorFlash(pixels,green)
+            colorFlash(pixels,blue)
+        if test == 4:
+            directForward(pixels,red)
+            directForward(pixels,green)
+            directForward(pixels,blue)
+        if test == 5:
+            directBackward(pixels,red)
+            directBackward(pixels,green)
+            directBackward(pixels,blue)
+        if test == 6:
+            arrived(pixels,red)
+            arrived(pixels,green)
+            arrived(pixels,blue)
+        if test == 7:
+            tornadoWarning(pixels)
+        if test == 8:
+            fireWarning(pixels)
+
+if __name__ == "__main__":
+    main()
