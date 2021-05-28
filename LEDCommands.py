@@ -62,10 +62,10 @@ def directForward(pixels, color, length=3, wait_ms = 50):
     pixels[len(pixels)-1] = (0, 0, 0)
     for i in range(len(pixels)):
         for n in range(length):
-            if i+n < len(pixels):
-                pixels[i+n] = (color[0],color[1],color[2])
-        if i-1 >= 0:
-            pixels[i-1] = (0, 0, 0)
+            if i-n >= 0:
+                pixels[i-n] = (color[0],color[1],color[2])
+        if (i+length)-1 >= 0:
+            pixels[(i+length)-1] = (0, 0, 0)
         #pixels.show()
         time.sleep(wait_ms / 1000.0)
         
