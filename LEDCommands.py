@@ -59,7 +59,7 @@ def tornadoWarning(pixels):
 
 def directForward(pixels, color, wait_ms = 50):
     "Wipe color across display a pixel at a time."
-    for i in range(50):
+    for i in range(len(pixels)):
         pixels[i] = (color[0],color[1],color[2])
         pixels.show()
         time.sleep(wait_ms / 1000.0)
@@ -83,11 +83,13 @@ def arrived(pixels, color, wait_ms = 50):
         time.sleep(wait_ms / 1000.0)
         turnOff(pixels)
 
+def init(LED_COUNT):
+    pixels = neopixel.NeoPixel(board.D18, LED_COUNT)
+    return pixels
 
 # Number of LEDs
 LED_COUNT = int(input("Number of LEDs on strip: "))
 pixels = neopixel.NeoPixel(board.D18, LED_COUNT)
-
 red = (255,0,0)
 green = (0,255,0)
 blue = (0,0,255)
