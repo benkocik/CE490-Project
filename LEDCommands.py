@@ -61,6 +61,8 @@ def directForward(pixels, color, wait_ms = 50):
     "Wipe color across display a pixel at a time."
     for i in range(len(pixels)):
         pixels[i] = (color[0],color[1],color[2])
+        pixels[i+1] = (color[0],color[1],color[2])
+        pixels[i+2] = (color[0],color[1],color[2])
         pixels.show()
         time.sleep(wait_ms / 1000.0)
         turnOff(pixels)
