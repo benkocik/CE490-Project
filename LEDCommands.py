@@ -59,12 +59,14 @@ def tornadoWarning(pixels):
 
 def directForward(pixels, color, length=3, wait_ms = 50):
     "Wipe color across display a pixel at a time."
+    counter = 0
     pixels[len(pixels)-1] = (0, 0, 0)
     for i in range(len(pixels)):
         for n in range(length):
             if i-n >= 0 and i+n < len(pixels):
+                counter += 1
                 pixels[i+n] = (color[0],color[1],color[2])
-        if (i-1) >= 0:
+        if (i-1) >= 0 or counter == length :
             pixels[(i-1)] = (0, 0, 0)
         time.sleep(wait_ms / 1000.0)
         
