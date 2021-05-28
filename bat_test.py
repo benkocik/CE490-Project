@@ -15,5 +15,5 @@ while True:
     # Select a random color
     color = [random.randint(0,255), random.randint(0,255), random.randint(0,255)]
     # Run fowards then backwards.
-    lc.directForward(pixels, color, 5, 100)
+    lc.directForward(pixels, color, 5, 25)
     #lc.directBackward(pixels, color)
