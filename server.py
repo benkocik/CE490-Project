@@ -10,10 +10,8 @@ import threading
 
 '''
 TODO:
-1. Have main use a while loop to get door and emergency type from user
-2. If there is a connection, create a new thread
-3. When we want to send information, send same to all - will probably be easier
-4. Implement protocol...
+1. If there is a connection, create a new thread
+2. When we want to send information, send same to all - will probably be easier
 '''
 # Appends to all messages - used mainly to bulk build messages
 def add_to_messages(l, t):
