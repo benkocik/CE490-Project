@@ -6,6 +6,7 @@ Code Description: Client code to receive information from server and other clien
 
 # Imports
 import socket
+import LEDCommands      # Commands for LED code
 
 # Main function definition
 def main():

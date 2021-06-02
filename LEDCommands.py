@@ -42,8 +42,6 @@ def fireWarning(pixels):
     solidColor(pixels,fire)
     time.sleep(100 / 1000.0)
 
-
-
 def tornadoWarning(pixels):
     "Performs specific pattern to indicate tornado emergency"
     tornado = (127,127,127)
@@ -54,8 +52,6 @@ def tornadoWarning(pixels):
     
         turnOff(pixels)
         time.sleep(50 / 1000.0)
-
-
 
 def directForward(pixels, color, length=3, wait_ms = 50):
     "Wipe color across display a pixel at a time."
