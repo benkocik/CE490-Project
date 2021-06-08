@@ -6,12 +6,12 @@ Code Description: Server to communicate to all clients or nodes.  Will also rece
 
 # Imports
 import socket
-import threading
+import _thread as thread
 
 '''
 TODO:
 1. If there is a connection, create a new thread
-2. When we want to send information, send same to all - will probably be easier
+2. Look into asyncore and select
 '''
 # Appends to all messages - used mainly to bulk build messages
 def add_to_messages(l, t):
@@ -20,8 +20,18 @@ def add_to_messages(l, t):
         l[m] = l[m] + t
     return l
 
+def get_message():
+    
+
+# Use this to create thread to establish connection
+def new_client(connection):
+    data = get_message()
+
 # Main function definition
 def main():
+    # Welcome user
+    print("Welcome")
+
     #########################
     ### Keys for protocol ###
     #########################
@@ -54,11 +64,28 @@ def main():
     ### End keys for protocol ###
     #############################
 
-    #TODO Start server
+    # Create socket for server
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    print("Socket created")
+
+    # Configure address and port
+    PORT = 12345
+    HOST = ""
+    
+    # Bind the port
+    s.bind((HOST, PORT))
+    print("Socket binded to port: " + str(PORT))
+
+    print("Waiting for at least one node...")
 
     # Get info from user, build message
     flag = True
     while flag:
+
+        # Accept connection from client
+        s.listen(5)
+        c, addr = s.accept()
+
         # Used to hold the message for the protocol
         messageA = "ALRT" + SERVER + NODEA  # Message from server to node A
         messageB = "ALRT" + SERVER + NODEB  # Message from server to node B
@@ -67,9 +94,6 @@ def main():
         # List of all messages. Easier for appending same information
         messages = [messageA, messageB, messageC]
 
-        # Welcome user
-        print("Welcome")
-
         # Get event type from user
         print("Select an event to run")
         print("Options: Off (0), Fire (1), Tornado (2), Intruder (3), General Emergency (4), Happy Event (5)")
@@ -77,16 +101,7 @@ def main():
 
         # Cases for events
         if event == 0 or (event < 0 or event > 5):
-            close = input("Would you like to exit the server? (y/n) ")
-            # If a user wants to turn it off, they can leave
-            if "y" in close:
-                flag = False
-                # Turn off anyhow
-                messages = add_to_messages(messages, OFF)
-                messages = add_to_messages(messages, FLASH)     # Irrelevant - not needed
-                messages = add_to_messages(messages, D1)        # Irrelevant - not needed
-                #TODO Send message
-                break
+            messages = add_to_messages(messages, OFF)
         elif event == 1:
             # Fire event
             messages = add_to_messages(messages, FIRE)
@@ -177,31 +192,12 @@ def main():
         # Append location to all messages
         messages = add_to_messages(messages, location)
 
-        ### DEBUGGING ###
-        for m in messages:
-            print(m)
+        c.send(str.encode(messages[0]))   # Send all messages to clients
 
-        #TODO ensure at least one node is connected, send messages to all
-
+    s.close()   # Close server
         
 '''
 ### PROTOCOL STUFF - TO BE DELETED ###
-
-    # Create socket for server
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    print("Socket created")
-
-    # Configure address and port
-    PORT = 12345
-    HOST = ""
-    
-    # Bind the port
-    s.bind((HOST, PORT))
-    print("Socket binded to port: " + str(PORT))
-
-    s.listen(5)
-    print("Socket is listening")
-
     while True:
         c, addr = s.accept()
         print("Received connection from " + str(addr))
