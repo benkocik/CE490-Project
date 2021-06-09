@@ -6,26 +6,13 @@ Code Description: Server to communicate to all clients or nodes.  Will also rece
 
 # Imports
 import socket
-import _thread as thread
 
-'''
-TODO:
-1. If there is a connection, create a new thread
-2. Look into asyncore and select
-'''
 # Appends to all messages - used mainly to bulk build messages
 def add_to_messages(l, t):
     # l is the message list, t is the event type
     for m in range(len(l)):
         l[m] = l[m] + t
-    return l
-
-def get_message():
-    
-
-# Use this to create thread to establish connection
-def new_client(connection):
-    data = get_message()
+    return l 
 
 # Main function definition
 def main():
@@ -71,20 +58,22 @@ def main():
     # Configure address and port
     PORT = 12345
     HOST = ""
-    
+
     # Bind the port
     s.bind((HOST, PORT))
     print("Socket binded to port: " + str(PORT))
+    
+    print("Waiting for all clients to connect...")
+    s.listen(5)
 
-    print("Waiting for at least one node...")
+    # Accept 3 connections
+    c1, addr1 = s.accept()
+    c2, addr2 = s.accept()
+    c3, addr3 = s.accept()
 
     # Get info from user, build message
     flag = True
     while flag:
-
-        # Accept connection from client
-        s.listen(5)
-        c, addr = s.accept()
 
         # Used to hold the message for the protocol
         messageA = "ALRT" + SERVER + NODEA  # Message from server to node A
@@ -192,37 +181,15 @@ def main():
         # Append location to all messages
         messages = add_to_messages(messages, location)
 
-        c.send(str.encode(messages[0]))   # Send all messages to clients
+        #TODO Make check for addresses to send correct message to correct node
+
+        c1.send(str.encode(messages[0]))
+        c2.send(str.encode(messages[1]))
+        c3.send(str.encode(messages[2]))
+
+        #TODO Receive messages here
 
     s.close()   # Close server
         
-'''
-### PROTOCOL STUFF - TO BE DELETED ###
-    while True:
-        c, addr = s.accept()
-        print("Received connection from " + str(addr))
-
-        # Get door from user
-        print("Select an exit door")
-        print("Options: 1, 2, 3, 4, 5, 6, 7")
-        exitDoor = 0
-        # Door input must be between 1 and 7
-        while exitDoor < 1 and exitDoor > 7:
-            exitDoor = input("Input Door (must be between 1 and 7): ")
-        
-        # Get emergency type from user
-        #TODO: Talk to client
-
-        #TODO: Send information to client
-
-        # Close if input is 0
-        if exitDoor == 0:
-            c.close()
-        # Otherwise send door
-        else:
-            c.send(exitDoor)
-
-'''
-
 if __name__ == "__main__":
     main()
