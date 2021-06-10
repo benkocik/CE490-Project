@@ -75,12 +75,12 @@ def directBackward(pixels, color, length = 3, wait_ms = 50):
     "Wipe color across display a pixel at a time."
     # Start at max, end at 0 - decrements instead of increments
     for i in range(len(pixels), -length, -1):
-        for n in range(length-1, -1, -1):
+        for n in range(length, -1, -1):
             if i-n >= 0 and i+n < len(pixels):
-                pixels[i+n] = color
+                pixels[i+n-1] = color
         # Turn off pixels behind
-        if (i+(length+1)) < len(pixels):
-            pixels[(i+(length+1))] = (0, 0, 0)
+        if (i+(length)) < len(pixels):
+            pixels[(i+(length))] = (0, 0, 0)
         time.sleep(wait_ms / 1000.0)
     turnOff(pixels)
 
