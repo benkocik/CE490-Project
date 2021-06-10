@@ -95,11 +95,11 @@ def arrived(pixels, color, length = 3, wait_ms = 50):
                 pixels[i-n] = color
                 pixels[((len(pixels)-1)-i)+n] = color
             # Turn off pixels behind
-            if ((i-length)-1) >= 0:
-                pixels[(i-length)-1] = (0, 0, 0)
+            if ((i-length)) >= 0:
+                pixels[(i-length)] = (0, 0, 0)
             # Turn off pixels behind
-            if (((len(pixels)-1)-i)+length+1) < len(pixels):
-                pixels[((len(pixels)-1)-i)+length+1] = (0, 0, 0)
+            if (((len(pixels)-1)-i)+length) < len(pixels):
+                pixels[((len(pixels)-1)-i)+length] = (0, 0, 0)
         time.sleep(wait_ms / 1000.0)
     turnOff(pixels)
 
