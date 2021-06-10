@@ -65,10 +65,10 @@ def directForward(pixels, color, length=3, wait_ms = 50):
     for i in range(len(pixels)):
         for n in range(length):
             if i-n >= 0 and i+n < len(pixels):
-                pixels[i+n] = color
+                pixels[i-n] = color
         # Turn off pixels behind
-        if (i-(length-1)) >= 0:
-            pixels[(i-(length-1))] = (0, 0, 0)
+        if (i-(length)) >= 0:
+            pixels[(i-(length))] = (0, 0, 0)
         time.sleep(wait_ms / 1000.0)
     turnOff(pixels)
         
@@ -78,7 +78,7 @@ def directBackward(pixels, color, length=3, wait_ms = 50):
     # Start at max, end at 0 - decrements instead of increments
     for i in range(len(pixels), 0, -1):
         for n in range(length, 0, -1):
-            if i+n >= len(pixels):
+            if i-n >= 0 and i+n < len(pixels):
                 pixels[i+n] = color
         # Turn off pixels behind
         if (i+length) < len(pixels):
