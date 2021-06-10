@@ -90,15 +90,13 @@ def arrived(pixels, color, length = 3, wait_ms = 50):
     for i in range(center):
         # Beginning side
         for n in range(length):
+            # Turn on pixels
             if i-n >= 0 and i+n < len(pixels):
                 pixels[i-n] = color
+                pixels[((len(pixels)-1)-i)+n] = color
             # Turn off pixels behind
             if ((i-length)-1) >= 0:
                 pixels[(i-length)-1] = (0, 0, 0)
-        # End side
-        for k in range(length, -1, -1):
-            if i-n >= 0 and i+n < len(pixels):
-                pixels[((len(pixels)-1)-i)+k] = color
             # Turn off pixels behind
             if (((len(pixels)-1)-i)+length+1) < len(pixels):
                 pixels[((len(pixels)-1)-i)+length+1] = (0, 0, 0)
