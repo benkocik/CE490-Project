@@ -67,9 +67,10 @@ def directForward(pixels, color, length=3, wait_ms = 50):
             if i-n >= 0 and i+n < len(pixels):
                 pixels[i+n] = color
         # Turn off pixels behind
-        if (i-1) >= 0:
-            pixels[(i-1)] = (0, 0, 0)
+        if (i-length) >= 0:
+            pixels[(i-length)] = (0, 0, 0)
         time.sleep(wait_ms / 1000.0)
+    turnOff(pixels)
         
 def directBackward(pixels, color, length=3, wait_ms = 50):
     "Wipe color across display a pixel at a time."
@@ -77,12 +78,13 @@ def directBackward(pixels, color, length=3, wait_ms = 50):
     # Start at max, end at 0 - decrements instead of increments
     for i in range(len(pixels), 0, -1):
         for n in range(length, 0, -1):
-            if i-n >= 0 and i+n < len(pixels):
+            if i+n > len(pixels):
                 pixels[i+n] = color
         # Turn off pixels behind
-        if (i+1) < len(pixels):
-            pixels[i+1] = (0, 0, 0)
+        if (i+length) < len(pixels):
+            pixels[(i+length)] = (0, 0, 0)
         time.sleep(wait_ms / 1000.0)
+    turnOff(pixels)
 
 def arrived(pixels, color, length = 3, wait_ms = 50):
     "Color flashes outward into center to display arrival"
@@ -93,7 +95,7 @@ def arrived(pixels, color, length = 3, wait_ms = 50):
                 pixels[i+n] = color
                 pixels[(len(pixels)-1) - i] = color
                 time.sleep(wait_ms / 1000.0)
-            turnOff(pixels)
+    turnOff(pixels)
 
 
 
