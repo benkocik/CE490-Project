@@ -80,7 +80,7 @@ def directBackward(pixels, color, length=3, wait_ms = 50):
             if i-n >= 0 and i+n < len(pixels):
                 pixels[i+n] = color
         # Turn off pixels behind
-        if (i-1) >= 0:
+        if (i+1) >= len(pixels):
             pixels[i - len(pixels)] = (0, 0, 0)
         time.sleep(wait_ms / 1000.0)
 
@@ -89,7 +89,7 @@ def arrived(pixels, color, wait_ms = 50):
     center = int(len(pixels) / 2)
     for i in range(center):
         pixels[i] = color
-        pixels[len(pixels) - i] = color
+        pixels[(len(pixels)-1) - i] = color
         time.sleep(wait_ms / 1000.0)
         turnOff(pixels)
 
