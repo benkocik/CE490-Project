@@ -91,7 +91,7 @@ def arrived(pixels, color, length = 3, wait_ms = 50):
         # Beginning side
         for n in range(length):
             if i-n >= 0 and i+n < len(pixels):
-                pixels[i+n] = color
+                pixels[i-n] = color
             # Turn off pixels behind
             if (i-(length-1)) >= 0:
                 pixels[i-(length-1)] = (0, 0, 0)
