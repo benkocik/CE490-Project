@@ -77,7 +77,7 @@ def directBackward(pixels, color, length=3, wait_ms = 50):
     pixels[0] = (0, 0, 0)
     # Start at max, end at 0 - decrements instead of increments
     for i in range(len(pixels), 0, -1):
-        for n in range(length, 0, -1):
+        for n in range(length):
             if i-n >= 0 and i+n < len(pixels):
                 pixels[i+n] = color
         # Turn off pixels behind
