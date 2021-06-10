@@ -81,12 +81,12 @@ def directBackward(pixels, color, length=3, wait_ms = 50):
                 pixels[i+n] = color
         # Turn off pixels behind
         if (i-1) >= 0:
-            pixels[len(pixels) - i] = color
+            pixels[i - len(pixels)] = (0, 0, 0)
         time.sleep(wait_ms / 1000.0)
 
 def arrived(pixels, color, wait_ms = 50):
     "Color flashes outward into center to display arrival"
-    center = len(pixels) / 2
+    center = int(len(pixels) / 2)
     for i in range(center):
         pixels[i] = color
         pixels[len(pixels) - i] = color
