@@ -56,11 +56,11 @@ def main( currNode ):
             rawData = s.recv(1024, socket.MSG_DONTWAIT)
         except BlockingIOError:
             pass
-        if not rawData:
-            pass
-        else:
+        try:
             data = rawData.decode('utf-8')
             print(str(data))    # Print for debugging purposes
+        except NameError:
+            pass
 
         # Parse data for messages
         messageType = data[0:4]
