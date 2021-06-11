@@ -69,6 +69,7 @@ def main():
     # Bind the port
     s.bind((HOST, PORT))
     print("Socket binded to port: " + str(PORT))
+    s.settimeout(5)
     
     print("Waiting for all clients to connect...")
     s.listen(5)
@@ -199,6 +200,8 @@ def main():
 
         # Send correct message to correct node
         # NODE A
+        print(addr1[0])
+        print(addr2[0])
         if addr1[0] == AADDR:
             c1.send(str.encode(messages[0]))
         elif addr2[0] == AADDR:

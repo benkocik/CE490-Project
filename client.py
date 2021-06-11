@@ -60,6 +60,7 @@ def main( currNode ):
 
         # Parse data for messages
         messageType = data[0:4]
+        print(messageType)
         sender = data[4:6]
         receiver = data[6:8]
         eventType = data[8:10]
@@ -77,6 +78,7 @@ def main( currNode ):
                 # Fire
                 elif eventType == "01":
                     color = (255,0,0)
+                    print("here")
                     # Flash
                     if direction == "0":
                         fireWarning( pixels )
