@@ -13,7 +13,7 @@ import board
 import RPi.GPIO as GPIO
 
 # Main function definition
-def main( currNode ):
+def main( currNode, hostAddr ):
     # Init LEDs
     LED_COUNT = 50
     pixels = init_led(LED_COUNT)
@@ -35,7 +35,7 @@ def main( currNode ):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # Configure port
     PORT = 12345
-    HOST = "192.168.1.123"   #TODO Address of the server
+    HOST = str(hostAddr)
     # Waits for server to become available
     connected = False
     while not connected:
@@ -183,4 +183,4 @@ def main( currNode ):
     
 if __name__ == "__main__":
     # First argument is receiver, this will be different on each node
-    main(sys.argv[1])
+    main(sys.argv[1], sys.argv[2])

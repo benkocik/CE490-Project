@@ -22,7 +22,6 @@ def receive_msg_thread(c, node):
         # Receive data
         rawData = c.recv(1024)
         data = rawData.decode('utf-8')
-        print(data)
 
         # Parse messages from data
         messageType = data[0:4]
@@ -37,21 +36,23 @@ def receive_msg_thread(c, node):
             errorMsg = ""
 
         # Print message
-        print(messageType)
         if messageType == "RECV":
-            # Check node
-            print(sender)
-            print(node)
-            if sender == node:
+            if node == "01":
                 print("\nNode A says:")
-                if powerSource == "0":
-                    print("Power source: Battery")
-                    print("Battery percentage " + batt)
-                elif powerSource == "0":
-                    print("Power source: Wall")
-                else:
-                    print("Error retreiving power source")
-                print(errorMsg)
+            elif node == "02":
+                print("\nNode B says:")
+            elif node == "03":
+                print("\nNode C says:")
+            else:
+                print("Unknown node says:")
+            if powerSource == "0":
+                print("Power source: Battery")
+                print("Battery percentage " + batt)
+            elif powerSource == "1":
+                print("Power source: Wall")
+            else:
+                print("Error retreiving power source")
+            print(errorMsg)
 
 # Main function definition
 def main():
@@ -59,8 +60,8 @@ def main():
     print("Welcome")
 
     # IP Address Key
-    AADDR = "192.168.1.101"
-    BADDR = "192.168.1.126"
+    AADDR = "169.254.29.196"
+    BADDR = "169.254.197.118"
     CADDR = ""
 
     #########################
@@ -116,15 +117,34 @@ def main():
     #c3, addr3 = s.accept()
 
     # Define threads to receive messages from client
-    t1 = threading.Thread(target=receive_msg_thread, args=(c1, NODEA))
-    t2 = threading.Thread(target=receive_msg_thread, args=(c2, NODEB))
-    #t3 = threading.Thread(target=receive_msg_thread, args=(c3, NODEC))
+    # NODE A
+    if addr1[0] == AADDR:
+        t1 = threading.Thread(target=receive_msg_thread, args=(c1, NODEA))
+    elif addr2[0] == AADDR:
+        t1 = threading.Thread(target=receive_msg_thread, args=(c2, NODEB))
+    #elif addr3[0] == AADDR:
+    #    t1 = threading.Thread(target=receive_msg_thread, args=(c3, NODEC))
 
-    # Start thread for node A
+    # NODE B
+    if addr1[0] == BADDR:
+        t2 = threading.Thread(target=receive_msg_thread, args=(c1, NODEA))
+    elif addr2[0] == BADDR:
+        t2 = threading.Thread(target=receive_msg_thread, args=(c2, NODEB))
+    #elif addr3[0] == AADDR:
+    #    t2 = threading.Thread(target=receive_msg_thread, args=(c3, NODEC))
+    '''
+    # NODE C
+    if addr1[0] == CADDR:
+        t3 = threading.Thread(target=receive_msg_thread, args=(c1, NODEA))
+    elif addr2[0] == CADDR:
+        t3 = threading.Thread(target=receive_msg_thread, args=(c2, NODEB))
+    #elif addr3[0] == AADDR:
+    #    t3 = threading.Thread(target=receive_msg_thread, args=(c3, NODEC))
+    '''
+
+    # Start threads
     t1.start()
-    # Start thread for node B
     t2.start()
-    # STart thread for node C
     #t3.start()
 
 
