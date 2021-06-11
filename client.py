@@ -153,7 +153,6 @@ def main( currNode ):
                     # Arrived
                     elif direction == "3":
                         arrived( pixels, color )
-        print(GPIO.input(channel))
         # Check power status
         if GPIO.input(channel) == 1:
             batt = "1"  # Wall power
