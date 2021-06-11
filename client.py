@@ -42,6 +42,7 @@ def main( currNode ):
             # Connect to the server
             s.connect((HOST, PORT))
             connected = True
+            print("Connected to " + HOST + " on port " + str(PORT))
         except Exception:
             pass
 
@@ -60,7 +61,6 @@ def main( currNode ):
 
         # Parse data for messages
         messageType = data[0:4]
-        print(messageType)
         sender = data[4:6]
         receiver = data[6:8]
         eventType = data[8:10]
@@ -70,15 +70,19 @@ def main( currNode ):
         
         # Determine what to do based on message
         if messageType == "ALRT":
+            print("messageType")
             # Check correct node
+            print(receiver)
+            print(currNode)
             if receiver == currNode:
+                print("receiver")
                 # Off
                 if eventType == "00":
                     turnOff(pixels)
                 # Fire
                 elif eventType == "01":
+                    print("eventType")
                     color = (255,0,0)
-                    print("here")
                     # Flash
                     if direction == "0":
                         fireWarning( pixels )
