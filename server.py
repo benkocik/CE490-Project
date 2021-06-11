@@ -7,6 +7,7 @@ Code Description: Server to communicate to all clients or nodes.  Will also rece
 # Imports
 import socket
 import threading
+from typing import no_type_check_decorator
 
 # Appends to all messages - used mainly to bulk build messages
 def add_to_messages(l, t):
@@ -36,10 +37,13 @@ def receive_msg_thread(c, node):
             errorMsg = ""
 
         # Print message
+        print(messageType)
         if messageType == "RECV":
-            # Node A
+            # Check node
+            print(sender)
+            print(node)
             if sender == node:
-                print("Node A says:")
+                print("\nNode A says:")
                 if powerSource == "0":
                     print("Power source: Battery")
                     print("Battery percentage " + batt)

@@ -175,7 +175,7 @@ def main( currNode ):
         sendMessage = "RECV" + currNode + "00" + batt + battPercent + errorMsg
 
         # Send status every 5 minutes
-        if int(time.time()-sendTime) >= 300:
+        if int(time.time()-sendTime) >= 30:
             s.send(str.encode(sendMessage))
             sendTime = time.time()
 
