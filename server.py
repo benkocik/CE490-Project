@@ -6,6 +6,7 @@ Code Description: Server to communicate to all clients or nodes.  Will also rece
 
 # Imports
 import socket
+import threading
 
 # Appends to all messages - used mainly to bulk build messages
 def add_to_messages(l, t):
@@ -13,6 +14,39 @@ def add_to_messages(l, t):
     for m in range(len(l)):
         l[m] = l[m] + t
     return l 
+
+# Listens to messages being send from any node
+def receive_msg_thread(c, node):
+    while True:
+        # Receive data
+        rawData = c.recv(1024)
+        data = rawData.decode('utf-8')
+
+        # Parse messages from data
+        messageType = data[0:4]
+        sender = data[4:6]
+        receiver = data[6:8]
+        powerSource = data[8:9]
+        batt = data[9:12]
+        # Support for any length of message, check for no message
+        if data[12] != data[-1]:
+            errorMsg = data[12:-1] + data[-1]
+        else:
+            errorMsg = ""
+
+        # Print message
+        if messageType == "RECV":
+            # Node A
+            if sender == node:
+                print("Node A says:")
+                if powerSource == "0":
+                    print("Power source: Battery")
+                    print("Battery percentage " + batt)
+                elif powerSource == "0":
+                    print("Power source: Wall")
+                else:
+                    print("Error retreiving power source")
+                print(errorMsg)
 
 # Main function definition
 def main():
@@ -77,10 +111,19 @@ def main():
     c1, addr1 = s.accept()
     c2, addr2 = s.accept()
     #c3, addr3 = s.accept()
-    # Continues if no data
-    c1.setblocking(0)
-    c2.setblocking(0)
-    #c3.setblocking(0)
+
+    # Define threads to receive messages from client
+    t1 = threading.Thread(target=receive_msg_thread, args=(c1, NODEA))
+    t2 = threading.Thread(target=receive_msg_thread, args=(c2, NODEB))
+    #t3 = threading.Thread(target=receive_msg_thread, args=(c3, NODEC))
+
+    # Start thread for node A
+    t1.start()
+    # Start thread for node B
+    t2.start()
+    # STart thread for node C
+    #t3.start()
+
 
     # Get info from user, build message
     flag = True
@@ -239,16 +282,15 @@ def main():
 
         # NODE A
         # Receive data
+        newDataA = True
         try:
             rawDataA = c1.recv(1024)
         except BlockingIOError:
-            pass
-        # TODO Fix this
-        if not rawDataA:
             newDataA = False    # Used to display data or not
-        else:
+        try:
             data = rawDataA.decode('utf-8')
-            newDataA = True
+        except NameError:
+            pass
         # Message parser
         if messageType == "RECV":
             # Node A
