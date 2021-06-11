@@ -58,7 +58,6 @@ def main( currNode ):
             pass
         try:
             data = rawData.decode('utf-8')
-            print(str(data))    # Print for debugging purposes
         except NameError:
             pass
 

@@ -77,6 +77,10 @@ def main():
     c1, addr1 = s.accept()
     c2, addr2 = s.accept()
     #c3, addr3 = s.accept()
+    # Continues if no data
+    c1.setblocking(0)
+    c2.setblocking(0)
+    #c3.setblocking(0)
 
     # Get info from user, build message
     flag = True
@@ -239,7 +243,7 @@ def main():
             rawDataA = c1.recv(1024)
         except BlockingIOError:
             pass
-        print("here")
+        # TODO Fix this
         if not rawDataA:
             newDataA = False    # Used to display data or not
         else:
