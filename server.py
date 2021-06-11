@@ -21,6 +21,7 @@ def receive_msg_thread(c, node):
         # Receive data
         rawData = c.recv(1024)
         data = rawData.decode('utf-8')
+        print(data)
 
         # Parse messages from data
         messageType = data[0:4]
@@ -29,7 +30,7 @@ def receive_msg_thread(c, node):
         powerSource = data[8:9]
         batt = data[9:12]
         # Support for any length of message, check for no message
-        if data[12] != data[-1]:
+        if data[11] != data[-1]:
             errorMsg = data[12:-1] + data[-1]
         else:
             errorMsg = ""
@@ -97,8 +98,6 @@ def main():
     # Configure address and port
     PORT = 12345
     HOST = ""
-    # Using blanks as place holder
-    data = "oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo"
 
     # Bind the port
     s.bind((HOST, PORT))
@@ -267,90 +266,6 @@ def main():
             c2.send(str.encode(messages[2]))
         elif addr3[0] == CADDR:
             c3.send(str.encode(messages[2]))
-        '''
-        # Receive messages from nodes
-        messageType = data[0:4]
-        sender = data[4:6]
-        receiver = data[6:8]
-        powerSource = data[8:9]
-        batt = data[9:12]
-        # Support for any length of message, check for no message
-        if data[12] != data[-1]:
-            errorMsg = data[12:-1] + data[-1]
-        else:
-            errorMsg = ""
-
-        # NODE A
-        # Receive data
-        newDataA = True
-        try:
-            rawDataA = c1.recv(1024)
-        except BlockingIOError:
-            newDataA = False    # Used to display data or not
-        try:
-            data = rawDataA.decode('utf-8')
-        except NameError:
-            pass
-        # Message parser
-        if messageType == "RECV":
-            # Node A
-            if sender == "01" and newDataA:
-                newDataA = False    # Reset newData flag
-                print("Node A says:")
-                if powerSource == "0":
-                    print("Power source: Battery")
-                    print("Battery percentage " + batt)
-                elif powerSource == "0":
-                    print("Power source: Wall")
-                else:
-                    print("Error retreiving power source")
-                print(errorMsg)
-        
-        # NODE B
-        # Receive data
-        rawDataB = c2.recv(1024)
-        if not rawDataB:
-            newDataB = False    # Used to display data or not
-        else:
-            data = rawDataB.decode('utf-8')
-            newDataB = True
-        # Message parser
-        if messageType == "RECV":
-            # Node B
-            if sender == "02" and newDataB:
-                newDataB = False    # Reset newData flag
-                print("Node A says:")
-                if powerSource == "0":
-                    print("Power source: Battery")
-                    print("Battery percentage " + batt)
-                elif powerSource == "0":
-                    print("Power source: Wall")
-                else:
-                    print("Error retreiving power source")
-                print(errorMsg)
-        '''
-        # NODE C
-        # Receive data
-        rawDataC = c3.recv(1024)
-        if not rawDataC:
-            newDataC = False    # Used to display data or not
-        else:
-            data = rawDataB.decode('utf-8')
-            newDataC = True
-        # Message parser
-        if messageType == "RECV":
-            # Node C
-            if sender == "03" and newDataC:
-                newDataC = False    # Reset newData flag
-                print("Node A says:")
-                if powerSource == "0":
-                    print("Power source: Battery")
-                    print("Battery percentage " + batt + "%")
-                elif powerSource == "0":
-                    print("Power source: Wall")
-                else:
-                    print("Error retreiving power source")
-                print(errorMsg)
         '''
     s.close()   # Close server
         

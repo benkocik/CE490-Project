@@ -9,6 +9,7 @@ import sys
 import time
 import socket
 from LEDCommands import *      # Commands for LED code
+import board
 import RPi.GPIO as GPIO
 
 # Main function definition
@@ -156,7 +157,7 @@ def main( currNode ):
         if GPIO.input(channel) == 1:
             batt = "1"  # Wall power
             batFlag = True
-            battPercent = ""
+            battPercent = "100"
         elif GPIO.input(channel) == 0:
             batt = "0"  # Battery
             # On first run
