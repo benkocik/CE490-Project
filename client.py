@@ -65,7 +65,8 @@ def main( currNode ):
         eventType = data[8:10]
         direction = data[10]
         location = data[11:13]
-
+        runAmount = data[13:15]
+        
         # Determine what to do based on message
         if messageType == "ALRT":
             # Check correct node

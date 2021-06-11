@@ -20,8 +20,8 @@ def main():
     print("Welcome")
 
     # IP Address Key
-    AADDR = "169.254.29.196"
-    BADDR = "169.254.197.118"
+    AADDR = "192.168.1.101"
+    BADDR = "192.168.1.126"
     CADDR = ""
 
     #########################
@@ -76,7 +76,7 @@ def main():
     # Accept 3 connections
     c1, addr1 = s.accept()
     c2, addr2 = s.accept()
-    c3, addr3 = s.accept()
+    #c3, addr3 = s.accept()
 
     # Get info from user, build message
     flag = True
@@ -203,17 +203,17 @@ def main():
             c1.send(str.encode(messages[0]))
         elif addr2 == AADDR:
             c2.send(str.encode(messages[0]))
-        elif addr3 == AADDR:
-            c3.send(str.encode(messages[0]))
+        #elif addr3 == AADDR:
+        #    c3.send(str.encode(messages[0]))
             
         # NODE B
         if addr1 == BADDR:
             c1.send(str.encode(messages[1]))
         elif addr2 == BADDR:
             c2.send(str.encode(messages[1]))
-        elif addr3 == CADDR:
-            c3.send(str.encode(messages[1]))
-
+        #elif addr3 == CADDR:
+        #    c3.send(str.encode(messages[1]))
+        '''
         # NODE C
         if addr1 == CADDR:
             c1.send(str.encode(messages[2]))
@@ -221,7 +221,7 @@ def main():
             c2.send(str.encode(messages[2]))
         elif addr3 == CADDR:
             c3.send(str.encode(messages[2]))
-
+        '''
         # Receive messages from nodes
         messageType = data[0:4]
         sender = data[4:6]
@@ -242,11 +242,6 @@ def main():
         else:
             data = rawDataA.decode('utf-8')
             newDataA = True
-            # Check error message exists
-            try:
-                errorMsg = data[12:63]
-            except Exception:
-                pass
         # Message parser
         if messageType == "RECV":
             # Node A
@@ -270,11 +265,6 @@ def main():
         else:
             data = rawDataB.decode('utf-8')
             newDataB = True
-            # Check error message exists
-            try:
-                errorMsg = data[12:63]
-            except Exception:
-                pass
         # Message parser
         if messageType == "RECV":
             # Node B
@@ -289,20 +279,15 @@ def main():
                 else:
                     print("Error retreiving power source")
                 print(errorMsg)
-
+        '''
         # NODE C
         # Receive data
         rawDataC = c3.recv(1024)
-        if not rawDataB:
+        if not rawDataC:
             newDataC = False    # Used to display data or not
         else:
             data = rawDataB.decode('utf-8')
             newDataC = True
-            # Check error message exists
-            try:
-                errorMsg = data[12:63]
-            except Exception:
-                pass
         # Message parser
         if messageType == "RECV":
             # Node C
@@ -317,7 +302,7 @@ def main():
                 else:
                     print("Error retreiving power source")
                 print(errorMsg)
-
+        '''
     s.close()   # Close server
         
 if __name__ == "__main__":
