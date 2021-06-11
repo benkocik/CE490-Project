@@ -186,4 +186,4 @@ def main( currNode ):
     
 if __name__ == "__main__":
     # First argument is receiver, this will be different on each node
-    main(sys.argv[0])
+    main(sys.argv[1])
