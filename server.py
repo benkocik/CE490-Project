@@ -69,7 +69,6 @@ def main():
     # Bind the port
     s.bind((HOST, PORT))
     print("Socket binded to port: " + str(PORT))
-    s.settimeout(5)
     
     print("Waiting for all clients to connect...")
     s.listen(5)
@@ -95,7 +94,7 @@ def main():
         print("Select an event to run")
         print("Options: Off (0), Fire (1), Tornado (2), Intruder (3), General Emergency (4), Happy Event (5)")
         event = int(input("Input event type: "))
-
+        
         # Cases for events
         if event == 0 or (event < 0 or event > 5):
             messages = add_to_messages(messages, OFF)
@@ -180,11 +179,10 @@ def main():
             directionC = FLASH
             location = D1   # This is irrelevant, but may be needed
 
-        # Append location to message
-        messageA = messageA + directionA
-        messageB = messageB + directionB
-        messageC = messageC + directionC
-        messages = [messageA, messageB, messageC]   # Remake list
+        # Append direction to messages
+        messages[0] += directionA
+        messages[1] += directionB
+        messages[2] += directionC
 
         # Append location to all messages
         messages = add_to_messages(messages, location)
@@ -200,8 +198,6 @@ def main():
 
         # Send correct message to correct node
         # NODE A
-        print(addr1[0])
-        print(addr2[0])
         if addr1[0] == AADDR:
             c1.send(str.encode(messages[0]))
         elif addr2[0] == AADDR:
@@ -239,7 +235,11 @@ def main():
 
         # NODE A
         # Receive data
-        rawDataA = c1.recv(1024)
+        try:
+            rawDataA = c1.recv(1024)
+        except BlockingIOError:
+            pass
+        print("here")
         if not rawDataA:
             newDataA = False    # Used to display data or not
         else:

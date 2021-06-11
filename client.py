@@ -52,7 +52,10 @@ def main( currNode ):
     flag = True
     while flag:
         # Get data from server
-        rawData = s.recv(1024)
+        try:
+            rawData = s.recv(1024, socket.MSG_DONTWAIT)
+        except BlockingIOError:
+            pass
         if not rawData:
             pass
         else:
@@ -70,18 +73,13 @@ def main( currNode ):
         
         # Determine what to do based on message
         if messageType == "ALRT":
-            print("messageType")
             # Check correct node
-            print(receiver)
-            print(currNode)
             if receiver == currNode:
-                print("receiver")
                 # Off
                 if eventType == "00":
                     turnOff(pixels)
                 # Fire
                 elif eventType == "01":
-                    print("eventType")
                     color = (255,0,0)
                     # Flash
                     if direction == "0":
@@ -155,7 +153,7 @@ def main( currNode ):
                     # Arrived
                     elif direction == "3":
                         arrived( pixels, color )
-        
+        print(GPIO.input(channel))
         # Check power status
         if GPIO.input(channel) == 1:
             batt = "1"  # Wall power
