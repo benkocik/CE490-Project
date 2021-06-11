@@ -199,27 +199,27 @@ def main():
 
         # Send correct message to correct node
         # NODE A
-        if addr1 == AADDR:
+        if addr1[0] == AADDR:
             c1.send(str.encode(messages[0]))
-        elif addr2 == AADDR:
+        elif addr2[0] == AADDR:
             c2.send(str.encode(messages[0]))
         #elif addr3 == AADDR:
         #    c3.send(str.encode(messages[0]))
             
         # NODE B
-        if addr1 == BADDR:
+        if addr1[0] == BADDR:
             c1.send(str.encode(messages[1]))
-        elif addr2 == BADDR:
+        elif addr2[0] == BADDR:
             c2.send(str.encode(messages[1]))
-        #elif addr3 == CADDR:
+        #elif addr3[0] == CADDR:
         #    c3.send(str.encode(messages[1]))
         '''
         # NODE C
-        if addr1 == CADDR:
+        if addr1[0] == CADDR:
             c1.send(str.encode(messages[2]))
-        elif addr2 == CADDR:
+        elif addr2[0] == CADDR:
             c2.send(str.encode(messages[2]))
-        elif addr3 == CADDR:
+        elif addr3[0] == CADDR:
             c3.send(str.encode(messages[2]))
         '''
         # Receive messages from nodes

@@ -154,6 +154,7 @@ def main( currNode ):
         if GPIO.input(channel) == 1:
             batt = "1"  # Wall power
             batFlag = True
+            battPercent = ""
         elif GPIO.input(channel) == 0:
             batt = "0"  # Battery
             # On first run
@@ -162,9 +163,8 @@ def main( currNode ):
                 batFlag = False
             # Calculate battery percentage
             battPercent = str(int(round(100-(((time.time() - startBat)/batTime)*100))))
-
-        if len(battPercent) == 2:
-            battPercent = "0" + battPercent # Add 0 in front
+            if len(battPercent) == 2:
+                battPercent = "0" + battPercent # Add 0 in front
 
         # Add error message, can be anything you want up to 50 chars
         errorMsg = ""
