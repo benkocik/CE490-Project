@@ -34,6 +34,7 @@ def main( currNode, hostAddr ):
     channel = 16
     GPIO.setup(channel, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
+    newData = False     # New data flag
     # Create socket
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # Configure port
