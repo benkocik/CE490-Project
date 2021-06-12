@@ -27,7 +27,7 @@ def main( currNode, hostAddr ):
     # Initialize GPIO for battery check
     batt = "1"                      # 0 == Battery, 1 == Wall
     battPercent = 100               # Holds battery percentage
-    expectBatTime = 20              # Amount of time in hours battery can run for
+    expectBatTime = 17              # Amount of time in hours battery can run for
     batTime = expectBatTime * 3600  # Amount of time in seconds battery can run for (used to calc unix epoch)
     batFlag = True                  # Flag for if battery has been turned on or not
     startBat = 0.0
@@ -75,6 +75,7 @@ def main( currNode, hostAddr ):
         runAmount = data[13:15]
 
         # Run amount for time interval
+        print(runAmount)
         if runAmount == "00":
             pass    # Ignore if 00, LEDs are off
         elif runAmount == "99":

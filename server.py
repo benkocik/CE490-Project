@@ -269,6 +269,7 @@ def main():
 
         # Append run amount to all messages
         messages = add_to_messages(messages, runAmount)
+        print(messages)
 
         # Send correct message to correct node
         # NODE A
