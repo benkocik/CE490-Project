@@ -7,7 +7,6 @@ Code Description: Server to communicate to all clients or nodes.  Will also rece
 # Imports
 import socket
 import threading
-from typing import no_type_check_decorator
 
 # Appends to all messages - used mainly to bulk build messages
 def add_to_messages(l, t):
@@ -38,11 +37,11 @@ def receive_msg_thread(c, node):
         # Print message
         if messageType == "RECV":
             if node == "01":
-                print("\nNode A says:")
+                print("\n\nNode A says:")
             elif node == "02":
-                print("\nNode B says:")
+                print("\n\nNode B says:")
             elif node == "03":
-                print("\nNode C says:")
+                print("\n\nNode C says:")
             else:
                 print("Unknown node says:")
             if powerSource == "0":
@@ -60,9 +59,13 @@ def main():
     print("Welcome")
 
     # IP Address Key
-    AADDR = "169.254.29.196"
-    BADDR = "169.254.197.118"
-    CADDR = ""
+    #AADDR = "169.254.29.196"
+    #BADDR = "169.254.197.118"
+    #CADDR = "169.254.115.119"
+    # Debugging
+    AADDR = "192.168.1.101"
+    BADDR = "192.168.1.126"
+    CADDR = "192.168.1.118"
 
     #########################
     ### Keys for protocol ###
@@ -114,7 +117,7 @@ def main():
     # Accept 3 connections
     c1, addr1 = s.accept()
     c2, addr2 = s.accept()
-    #c3, addr3 = s.accept()
+    c3, addr3 = s.accept()
 
     # Define threads to receive messages from client
     # NODE A
@@ -122,30 +125,30 @@ def main():
         t1 = threading.Thread(target=receive_msg_thread, args=(c1, NODEA))
     elif addr2[0] == AADDR:
         t1 = threading.Thread(target=receive_msg_thread, args=(c2, NODEB))
-    #elif addr3[0] == AADDR:
-    #    t1 = threading.Thread(target=receive_msg_thread, args=(c3, NODEC))
+    elif addr3[0] == AADDR:
+        t1 = threading.Thread(target=receive_msg_thread, args=(c3, NODEC))
 
     # NODE B
     if addr1[0] == BADDR:
         t2 = threading.Thread(target=receive_msg_thread, args=(c1, NODEA))
     elif addr2[0] == BADDR:
         t2 = threading.Thread(target=receive_msg_thread, args=(c2, NODEB))
-    #elif addr3[0] == AADDR:
-    #    t2 = threading.Thread(target=receive_msg_thread, args=(c3, NODEC))
-    '''
+    elif addr3[0] == BADDR:
+        t2 = threading.Thread(target=receive_msg_thread, args=(c3, NODEC))
+    
     # NODE C
     if addr1[0] == CADDR:
         t3 = threading.Thread(target=receive_msg_thread, args=(c1, NODEA))
     elif addr2[0] == CADDR:
         t3 = threading.Thread(target=receive_msg_thread, args=(c2, NODEB))
-    #elif addr3[0] == AADDR:
-    #    t3 = threading.Thread(target=receive_msg_thread, args=(c3, NODEC))
-    '''
+    elif addr3[0] == CADDR:
+        t3 = threading.Thread(target=receive_msg_thread, args=(c3, NODEC))
+    
 
     # Start threads
     t1.start()
     t2.start()
-    #t3.start()
+    t3.start()
 
 
     # Get info from user, build message
@@ -259,8 +262,9 @@ def main():
 
         # Time amount to run for
         print("Amount of time to run for")
-        print("Input number of 10 second increments (i.e. 30 is 5 minutes)")
-        print("Max is 5 minutes, 0 is infinite")
+        print("Input number of 10 second intervals to run for")
+        print("Example: 30 is 5 minutes, 01 is 10 seconds")
+        print("Max is 5 minutes, 0 is off, 99 is infinite")
         runAmount = input("Run time: ")
 
         # Append run amount to all messages
@@ -272,17 +276,17 @@ def main():
             c1.send(str.encode(messages[0]))
         elif addr2[0] == AADDR:
             c2.send(str.encode(messages[0]))
-        #elif addr3 == AADDR:
-        #    c3.send(str.encode(messages[0]))
+        elif addr3 == AADDR:
+            c3.send(str.encode(messages[0]))
             
         # NODE B
         if addr1[0] == BADDR:
             c1.send(str.encode(messages[1]))
         elif addr2[0] == BADDR:
             c2.send(str.encode(messages[1]))
-        #elif addr3[0] == CADDR:
-        #    c3.send(str.encode(messages[1]))
-        '''
+        elif addr3[0] == CADDR:
+            c3.send(str.encode(messages[1]))
+        
         # NODE C
         if addr1[0] == CADDR:
             c1.send(str.encode(messages[2]))
@@ -290,7 +294,7 @@ def main():
             c2.send(str.encode(messages[2]))
         elif addr3[0] == CADDR:
             c3.send(str.encode(messages[2]))
-        '''
+        
     s.close()   # Close server
         
 if __name__ == "__main__":

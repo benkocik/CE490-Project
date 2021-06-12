@@ -19,7 +19,10 @@ def main( currNode, hostAddr ):
     pixels = init_led(LED_COUNT)
     color = (0,0,0)
 
+    # Timer stuff
     sendTime = time.time()
+    startTimer = True
+    runAmountStart = 0
 
     # Initialize GPIO for battery check
     batt = "1"                      # 0 == Battery, 1 == Wall
@@ -70,7 +73,24 @@ def main( currNode, hostAddr ):
         direction = data[10]
         location = data[11:13]
         runAmount = data[13:15]
-        
+
+        # Run amount for time interval
+        if runAmount == "00":
+            pass    # Ignore if 00, LEDs are off
+        elif runAmount == "99":
+            pass    # Ignore if 99, run for infinite time
+        else:
+            # Start timer
+            if startTimer:
+                runAmountStart = time.time()
+                startTimer = False
+            # If timer is started, check it
+            else:
+                if (time.time()-runAmountStart) >= (int(runAmount)*10):
+                    eventType = "00"
+                    runAmount = "00"
+                    startTimer = True
+                 
         # Determine what to do based on message
         if messageType == "ALRT":
             # Check correct node
@@ -172,10 +192,11 @@ def main( currNode, hostAddr ):
         # Add error message, can be anything you want up to 50 chars
         errorMsg = ""
 
+        # Compile message together to one string
         sendMessage = "RECV" + currNode + "00" + batt + battPercent + errorMsg
 
         # Send status every 5 minutes
-        if int(time.time()-sendTime) >= 30:
+        if int(time.time()-sendTime) >= 300:
             s.send(str.encode(sendMessage))
             sendTime = time.time()
 
