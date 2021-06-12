@@ -75,7 +75,6 @@ def main( currNode, hostAddr ):
         runAmount = data[13:15]
 
         # Run amount for time interval
-        print(runAmount)
         if runAmount == "00":
             pass    # Ignore if 00, LEDs are off
         elif runAmount == "99":
