@@ -124,23 +124,23 @@ def main():
     if addr1[0] == AADDR:
         t1 = threading.Thread(target=receive_msg_thread, args=(c1, NODEA))
     elif addr2[0] == AADDR:
-        t1 = threading.Thread(target=receive_msg_thread, args=(c2, NODEB))
+        t1 = threading.Thread(target=receive_msg_thread, args=(c2, NODEA))
     elif addr3[0] == AADDR:
-        t1 = threading.Thread(target=receive_msg_thread, args=(c3, NODEC))
+        t1 = threading.Thread(target=receive_msg_thread, args=(c3, NODEA))
 
     # NODE B
     if addr1[0] == BADDR:
-        t2 = threading.Thread(target=receive_msg_thread, args=(c1, NODEA))
+        t2 = threading.Thread(target=receive_msg_thread, args=(c1, NODEB))
     elif addr2[0] == BADDR:
         t2 = threading.Thread(target=receive_msg_thread, args=(c2, NODEB))
     elif addr3[0] == BADDR:
-        t2 = threading.Thread(target=receive_msg_thread, args=(c3, NODEC))
+        t2 = threading.Thread(target=receive_msg_thread, args=(c3, NODEB))
     
     # NODE C
     if addr1[0] == CADDR:
-        t3 = threading.Thread(target=receive_msg_thread, args=(c1, NODEA))
+        t3 = threading.Thread(target=receive_msg_thread, args=(c1, NODEC))
     elif addr2[0] == CADDR:
-        t3 = threading.Thread(target=receive_msg_thread, args=(c2, NODEB))
+        t3 = threading.Thread(target=receive_msg_thread, args=(c2, NODEC))
     elif addr3[0] == CADDR:
         t3 = threading.Thread(target=receive_msg_thread, args=(c3, NODEC))
     
@@ -264,12 +264,11 @@ def main():
         print("Amount of time to run for")
         print("Input number of 10 second intervals to run for")
         print("Example: 30 is 5 minutes, 01 is 10 seconds")
-        print("Max is 5 minutes, 0 is off, 99 is infinite")
+        print("Max is 5 minutes, 00 is off, 99 is infinite")
         runAmount = input("Run time: ")
 
         # Append run amount to all messages
         messages = add_to_messages(messages, runAmount)
-        print(messages)
 
         # Send correct message to correct node
         # NODE A
