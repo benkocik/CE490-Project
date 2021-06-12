@@ -58,6 +58,7 @@ def main( currNode, hostAddr ):
         # Get data from server
         try:
             rawData = s.recv(1024, socket.MSG_DONTWAIT)
+            newData = True
         except BlockingIOError:
             pass
         try:
@@ -65,14 +66,17 @@ def main( currNode, hostAddr ):
         except NameError:
             pass
 
-        # Parse data for messages
-        messageType = data[0:4]
-        sender = data[4:6]
-        receiver = data[6:8]
-        eventType = data[8:10]
-        direction = data[10]
-        location = data[11:13]
-        runAmount = data[13:15]
+        # Used for efficiency and so message parts can be changed
+        if newData:
+            # Parse data for messages
+            messageType = data[0:4]
+            sender = data[4:6]
+            receiver = data[6:8]
+            eventType = data[8:10]
+            direction = data[10]
+            location = data[11:13]
+            runAmount = data[13:15]
+            newData = False
 
         # Run amount for time interval
         if runAmount == "00":
