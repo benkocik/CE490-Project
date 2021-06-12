@@ -51,7 +51,7 @@ def main( currNode, hostAddr ):
             pass
 
     # Data placeholder in case of no data on first loop(s)
-    data = "oooooooooooooo"
+    data = "00000000000000"
 
     flag = True
     while flag:
