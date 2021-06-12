@@ -87,8 +87,8 @@ def main( currNode, hostAddr ):
             # If timer is started, check it
             else:
                 if (time.time()-runAmountStart) >= (int(runAmount)*10):
-                    eventType = "00"
-                    runAmount = "00"
+                    data[8:10] = "00"
+                    data[13:15] = "00"
                     startTimer = True
                  
         # Determine what to do based on message
