@@ -59,9 +59,9 @@ def main():
     print("Welcome")
 
     # IP Address Key
-    AADDR = "169.254.29.196"
-    BADDR = "169.254.197.118"
-    CADDR = "169.254.115.119"
+    AADDR = "192.168.137.76"
+    BADDR = "192.168.137.19"
+    CADDR = "192.168.137.3"
     # Debugging
     #AADDR = "192.168.1.101"
     #BADDR = "192.168.1.126"
